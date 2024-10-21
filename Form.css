@@ -49,6 +49,12 @@
     -webkit-box-shadow: 0px 17px 34px -20px #f55951;
             box-shadow: 0px 17px 34px -20px #f55951;
   }
+
+  @media screen and (max-width: 425px) {
+    .container {
+      border-radius: 0 0 1em 1em;
+    }
+  }
   
   .title {
     font-size: 1.6rem;
@@ -69,14 +75,23 @@
     overflow: hidden;
     padding: 0;
   }
+
+  @media screen and (max-width: 425px) {
+    .container {
+    max-width: 425px;
+    overflow: hidden;
+    padding: 0;
+  }
+  }
   
   .img {
     width: 100%;
     height: auto;
+    /*
     border-radius: 1em 1em 0 0;
     -o-object-fit: cover;
        object-fit: cover;
-    /*
+    
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
     */
@@ -114,7 +129,7 @@
     display: grid;
     place-items: center;
     padding: 0 1.5em;
-    margin-bottom: 1.8em;
+    margin-bottom: 2.5em;
   }
   
   .mail {
