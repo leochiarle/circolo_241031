@@ -127,6 +127,7 @@ function sheetdb(){
                   "Cognome": document.getElementById(`input-cognome${i}`).value,
                   "Email": document.getElementById(`input-email${i}`).value,
                   "Telefono": document.getElementById(`input-telefono${i}`).value,
+                  "canale_di_vendita": canaleDiVendita,
                   "valore_in_euro": "DEVE PAGARE"
               }]
       })
