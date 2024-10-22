@@ -33,7 +33,8 @@ function sheetdb(){
                   "Email": localStorage.getItem(`Email${i}`),
                   "Telefono": localStorage.getItem(`Telefono${i}`),
                   "canale_di_vendita": localStorage.getItem(`Canale${i}`),
-                  "valore_in_euro": localStorage.getItem(`Valore${i}`)
+                  "valore_in_euro": localStorage.getItem(`Valore${i}`),
+                  "Metodo di Pagamento": "stripe"
               }]
       })
     })
