@@ -176,7 +176,7 @@ function saveFormData(){
     localStorage.setItem(`Email${i}`, document.getElementById(`input-email${i}`).value)
     localStorage.setItem(`Telefono${i}`, document.getElementById(`input-telefono${i}`).value)
     localStorage.setItem(`Canale${i}`, canaleDiVendita)
-    localStorage.setItem(`Valore${i}`, totPerson*prezzo)
+    localStorage.setItem(`Valore${i}`, prezzo)
   }
 }
 
