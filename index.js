@@ -37,8 +37,8 @@ function initialization(){
   document.getElementById('valore').value = valoreInEuro;
 
   if(document.getElementById('vendita').value == ""){
-    document.getElementById('vendita').value = "circololimoni.it";
-    canaleDiVendita = "circololimoni.it";
+    document.getElementById('vendita').value = "circololimoni";
+    canaleDiVendita = "circololimoni";
   }
 
   window.history.pushState('page2', 'Title', window.location.href.split('?')[0]);
