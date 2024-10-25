@@ -1,34 +1,15 @@
 
-/*
-let linkPagamento = link5;
-const link5 = "https://pay.sumup.com/b2c/Q5ACLDVZ"; //10
-const link10 = "https://pay.sumup.com/b2c/QNCWRBHR"; //20
-const link15 = "https://pay.sumup.com/b2c/Q038L7V3"; //30
-const link20 = "https://pay.sumup.com/b2c/QEOXEFK9"; //40
-const link25 = "https://pay.sumup.com/b2c/QYKT3G65"; //50
-const link30 = "https://pay.sumup.com/b2c/Q8I71GMC"; //60
-*/
 
 let friendAdded = 0;
 let totPerson = 1;
 const prezzo = 15;
-let CardSumUp;
-const idCheckOut = 'ID_UNICO_' + Date.now();
-let checkoutData;
-let checkoutID;
 let canaleDiVendita, valoreInEuro;
 //const stripe = Stripe('pk_test_51QAv6nBlOJumB3Tb4czFvyfDoho7mf8pFnS1GKHhoxygr18cvwBEzNZTnsAo2zFREw5ShDy9bDGAdXC4JENUy3SH00cyYldY4e');
 const stripe = Stripe('pk_live_51QAv6nBlOJumB3TbwzRFO14tmTkgA5QUj0FWnxCbF78IVvfg2LoPlH3yxvQmKn0ofSlocgjTrmHspbKKrxMC9Awq00VKm3xvdu');
 
 
-function initialization(){
-  /*
-  let insta = navigator.userAgent.includes("Instagram");
-  const isAndroid = navigator.userAgent.toLowerCase().includes('android');
-  if(insta && isAndroid){
-    document.getElementById("instagram").style.display = "inline-block";
-  }
-  */
+async function initialization(){
+  
   const urlParams = new URLSearchParams(window.location.search);
   canaleDiVendita = urlParams.get('ncdhsdskfdnd');
   valoreInEuro = urlParams.get('riekndaocno');
@@ -52,9 +33,13 @@ function dateNow(){
 }
 
 function payment(){
-  if(!isInputEmpty()){
+  for(let i = 0; i < totPerson; i++){
+    document.getElementById(`invalid-email${i}`).style.display = "none";
+    document.getElementById(`invalid-telefono${i}`).style.display = "none";
+  }
 
-    //checkoutID = createCheckout();
+  if(isInputValid()){
+
     document.getElementById('Date').value = dateNow();
 
     document.getElementById("friends-button").remove();
@@ -64,24 +49,9 @@ function payment(){
     document.getElementById("sheetdb-form").style.display = "none";
     
     saveFormData();
-    
     sheetdb();
-    initialize();
+    createCheckout();
 
-    //document.getElementById("pay-with-satispay").style.display = "inline-block";
-/*
-    var satispay = SatispayWebButton.configure({
-      paymentId: '8f27fbbc-ff4b-45eb-98d0-1cadb3a0afaa',
-      completed: function() {
-        // executed on payment success or failure
-      }
-    })
-    
-    document.getElementById('pay-with-satispay').addEventListener('click', function(e) {
-      e.preventDefault()
-      satispay.open()
-    })
-*/
   }
 }
 
@@ -142,11 +112,11 @@ function sheetdb(){
   }
 }
 
-async function initialize() {
+async function createCheckout() {
   try{
     const fetchClientSecret = async () => {
       const response = await fetch("https://circolo-server-private.onrender.com/create-checkout-session", {
-        //const response = await fetch("http://localhost:3000/create-checkout-session", {
+      //const response = await fetch("http://localhost:3000/create-checkout-session", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -186,13 +156,26 @@ function saveFormData(){
 }
 
 
-function isInputEmpty(){
+function isInputValid(){
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   for(let i = 0; i < totPerson; i++){
     if(document.getElementById(`input-nome${i}`).value === "" || document.getElementById(`input-cognome${i}`).value === "" || document.getElementById(`input-email${i}`).value === "" || document.getElementById(`input-telefono${i}`).value === ""){
-      return true;
+      return false;
+    }else if(emailPattern.test(document.getElementById(`input-email${i}`).value) == false){
+      document.getElementById(`invalid-email${i}`).innerHTML = "Formato email non valido"
+      document.getElementById(`invalid-email${i}`).style.display = "inline-block";
+      return false;
+    }else if((document.getElementById(`input-telefono${i}`).value).length < 10){
+      document.getElementById(`invalid-telefono${i}`).innerHTML = "Numero di telefono non valido (meno di 10 cifre)"
+      document.getElementById(`invalid-telefono${i}`).style.display = "inline-block";
+      return false;
+    }else if((document.getElementById(`input-telefono${i}`).value).length > 10){
+      document.getElementById(`invalid-telefono${i}`).innerHTML = "Numero di telefono non valido (più di 10 cifre)"
+      document.getElementById(`invalid-telefono${i}`).style.display = "inline-block";
+      return false;
     }
   }
-  return false;
+  return true;
 }
 
 function addFriend(){
@@ -200,42 +183,43 @@ function addFriend(){
     totPerson++;
 
     let newFormFriend = document.createElement("div");
-
     newFormFriend.id = `formFriend${friendAdded}`;
 
-    newFormFriend.innerHTML = `<p id="friendNumber${friendAdded}" class="mt-5 mb-3 fw-bold fs-5">Friend number ${friendAdded}:</p>`;
-    let a = `<div id="row-nome${friendAdded}" class="row">
+    newFormFriend.innerHTML = `<p id="friendNumber${friendAdded}" class="mt-5 mb-3 fw-bold fs-5">Friend number ${friendAdded}:</p>
+            <div id="row-nome${friendAdded}" class="row">
               <div id="Nome${friendAdded}">
-                <label for="validationDefault01" class="form-label"></label>
-                <input id="input-nome${friendAdded}" type="text" class="form-control" name="Nome${friendAdded}" placeholder="Nome" id="validationDefault01" required>
+                <label class="form-label"></label>
+                <input id="input-nome${friendAdded}" type="text" class="form-control" name="Nome${friendAdded}" placeholder="Nome" required>
               </div>
+              <div id="invalid-nome${friendAdded}" class="invalid" style="display: none;"></div>
             </div>
             <div id="row-cognome${friendAdded}" class="row">
               <div id="Cognome${friendAdded}" class="">
                 <label for="validationDefault02" class="form-label"></label>
-                <input id="input-cognome${friendAdded}" type="text" class="form-control" name="Cognome${friendAdded}" placeholder="Cognome" id="validationDefault02" required>
+                <input id="input-cognome${friendAdded}" type="text" class="form-control" name="Cognome${friendAdded}" placeholder="Cognome" required>
               </div>
+              <div id="invalid-cognome${friendAdded}" class="invalid" style="display: none;"></div>
             </div>
             <div id="Email${friendAdded}" class="row">
               <div class="">
-                <label for="validationDefaultUsername" class="form-label"></label>
+                <label class="form-label"></label>
                 <div class="input-group">
-                  <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                  <input id="input-email${friendAdded}" type="email" class="form-control" name="Email${friendAdded}" placeholder="Email" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required>
+                  <span class="input-group-text">@</span>
+                  <input id="input-email${friendAdded}" type="email" class="form-control" name="Email${friendAdded}" placeholder="Email" required>
                 </div>
               </div>
+              <div id="invalid-email${friendAdded}" class="invalid ms-3 ps-5" style="display: none;"></div>
             </div>
-            <div id="phoneNumbe${friendAdded}" class="row">
-              <div id="Phone" class="mb-3">
-                <label for="validationDefault03" class="form-label"></label>
+            <div id="phoneNumbe${friendAdded}" class="row mb-4">
+              <div id="Phone" class="">
+                <label class="form-label"></label>
                 <div class="input-group">
-                  <span class="input-group-text" id="inputGroupPrepend3">+39</span>
-                  <input id="input-telefono${friendAdded}" type="tel" class="form-control" name="Telefono${friendAdded}" placeholder="Telefono" id="validationDefault03" aria-describedby="inputGroupPrepend3" required>
+                  <span class="input-group-text">+39</span>
+                  <input id="input-telefono${friendAdded}" type="tel" class="form-control" name="Telefono${friendAdded}" placeholder="Telefono" required>
                 </div>
               </div>
+              <div id="invalid-telefono${friendAdded}" class="invalid ms-3 ps-5" style="display: none;"></div>
             </div>`;
-
-    newFormFriend.innerHTML += a;
 
     document.getElementById("formFriend").append(newFormFriend);
 
