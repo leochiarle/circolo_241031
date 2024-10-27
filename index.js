@@ -165,6 +165,14 @@ function isInputValid(){
       document.getElementById(`invalid-email${i}`).innerHTML = "Formato email non valido"
       document.getElementById(`invalid-email${i}`).style.display = "inline-block";
       return false;
+    }else if(existEmail(document.getElementById(`input-email${i}`).value, i) == true){
+      document.getElementById(`invalid-email${i}`).innerHTML = "Hai gia' inserito questa mail"
+      document.getElementById(`invalid-email${i}`).style.display = "inline-block";
+      return false;
+    }else if(existTelefono(document.getElementById(`input-telefono${i}`).value, i) == true){
+      document.getElementById(`invalid-telefono${i}`).innerHTML = "Hai gia' inserito questo numero di telefono"
+      document.getElementById(`invalid-telefono${i}`).style.display = "inline-block";
+      return false;
     }else if((document.getElementById(`input-telefono${i}`).value).length < 10){
       document.getElementById(`invalid-telefono${i}`).innerHTML = "Numero di telefono non valido (meno di 10 cifre)"
       document.getElementById(`invalid-telefono${i}`).style.display = "inline-block";
@@ -176,6 +184,24 @@ function isInputValid(){
     }
   }
   return true;
+}
+
+function existEmail(email, index){
+  for(let i = 0; i < index; i++){
+    if(document.getElementById(`input-email${i}`).value == email){
+      return true
+    }
+  }
+  return false;
+}
+
+function existTelefono(telefono, index){
+  for(let i = 0; i < index; i++){
+    if(document.getElementById(`input-telefono${i}`).value == telefono){
+      return true
+    }
+  }
+  return false;
 }
 
 function addFriend(){
