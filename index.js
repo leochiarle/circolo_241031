@@ -102,7 +102,7 @@ function sheetdb(){
                   "Cognome": document.getElementById(`input-cognome${i}`).value,
                   "Email": document.getElementById(`input-email${i}`).value,
                   "Telefono": document.getElementById(`input-telefono${i}`).value,
-                  "CF": document.getElementById(`input-CF${i}`).value.toUpperCase(),
+                  "CF": document.getElementById(`input-CF${i}`).value,
                   "Residenza": document.getElementById(`input-residenza${i}`).value,
                   "canale_di_vendita": canaleDiVendita,
                   "valore_in_euro": "DEVE PAGARE"
@@ -152,7 +152,7 @@ function saveFormData(){
     localStorage.setItem(`Cognome${i}`, document.getElementById(`input-cognome${i}`).value)
     localStorage.setItem(`Email${i}`, document.getElementById(`input-email${i}`).value)
     localStorage.setItem(`Telefono${i}`, document.getElementById(`input-telefono${i}`).value)
-    localStorage.setItem(`CF${i}`, document.getElementById(`input-CF${i}`).value.toUpperCase())
+    localStorage.setItem(`CF${i}`, document.getElementById(`input-CF${i}`).value)
     localStorage.setItem(`Residenza${i}`, document.getElementById(`input-residenza${i}`).value)
     localStorage.setItem(`Canale${i}`, canaleDiVendita)
     localStorage.setItem(`Valore${i}`, prezzo)
@@ -162,8 +162,9 @@ function saveFormData(){
 
 function isInputValid(){
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const CFpattern = /^[a-zA-Z]{6}[0-9]{2}[a-zA-Z][0-9]{2}[a-zA-Z][0-9]{3}[a-zA-Z]$/;
   for(let i = 0; i < totPerson; i++){
-    if(document.getElementById(`input-nome${i}`).value === "" || document.getElementById(`input-cognome${i}`).value === "" || document.getElementById(`input-email${i}`).value === "" || document.getElementById(`input-telefono${i}`).value === ""){
+    if(document.getElementById(`input-nome${i}`).value === "" || document.getElementById(`input-cognome${i}`).value === "" || document.getElementById(`input-email${i}`).value === "" || document.getElementById(`input-telefono${i}`).value === "" || document.getElementById(`input-CF${i}`).value === "" || document.getElementById(`input-residenza${i}`).value === ""){
       return false;
     }else if(emailPattern.test(document.getElementById(`input-email${i}`).value) == false){
       document.getElementById(`invalid-email${i}`).innerHTML = "Formato email non valido"
@@ -184,6 +185,10 @@ function isInputValid(){
     }else if((document.getElementById(`input-telefono${i}`).value).length > 10){
       document.getElementById(`invalid-telefono${i}`).innerHTML = "Numero di telefono non valido (più di 10 cifre)"
       document.getElementById(`invalid-telefono${i}`).style.display = "inline-block";
+      return false;
+    }else if(document.getElementById(`input-CF${i}`).value.search(CFpattern) == -1){
+      document.getElementById(`invalid-CF${i}`).innerHTML = "Formato non valido"
+      document.getElementById(`invalid-CF${i}`).style.display = "inline-block";
       return false;
     }
   }
