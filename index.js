@@ -102,6 +102,8 @@ function sheetdb(){
                   "Cognome": document.getElementById(`input-cognome${i}`).value,
                   "Email": document.getElementById(`input-email${i}`).value,
                   "Telefono": document.getElementById(`input-telefono${i}`).value,
+                  "CF": document.getElementById(`input-CF${i}`).value,
+                  "Residenza": document.getElementById(`input-residenza${i}`).value,
                   "canale_di_vendita": canaleDiVendita,
                   "valore_in_euro": "DEVE PAGARE"
               }]
@@ -150,6 +152,8 @@ function saveFormData(){
     localStorage.setItem(`Cognome${i}`, document.getElementById(`input-cognome${i}`).value)
     localStorage.setItem(`Email${i}`, document.getElementById(`input-email${i}`).value)
     localStorage.setItem(`Telefono${i}`, document.getElementById(`input-telefono${i}`).value)
+    localStorage.setItem(`CF${i}`, document.getElementById(`input-CF${i}`).value)
+    localStorage.setItem(`Residenza${i}`, document.getElementById(`input-residenza${i}`).value)
     localStorage.setItem(`Canale${i}`, canaleDiVendita)
     localStorage.setItem(`Valore${i}`, prezzo)
   }
@@ -245,6 +249,16 @@ function addFriend(){
                 </div>
               </div>
               <div id="invalid-telefono${friendAdded}" class="invalid ms-3 ps-5" style="display: none;"></div>
+            </div>
+            <div id="CF${friendAdded}" class="mt-4">
+              <h2 class="form-label"></h2>
+              <input id="input-CF${friendAdded}" type="text" class="form-control" name="CF${friendAdded}" placeholder="Codice Fiscale" required>
+              <div id="invalid-CF${friendAdded}" class="invalid" style="display: none;"></div>
+            </div>
+            <div id="residenza${friendAdded}" class="mt-4 mb-4">
+              <h2 class="form-label"></h2>
+              <input id="input-residenza${friendAdded}" type="text" class="form-control" name="Residenza${friendAdded}" placeholder="Indirizzo di residenza" required>
+              <div id="invalid-residenza${friendAdded}" class="invalid" style="display: none;"></div>
             </div>`;
 
     document.getElementById("formFriend").append(newFormFriend);

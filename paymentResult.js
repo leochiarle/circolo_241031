@@ -32,6 +32,8 @@ function sheetdb(){
                   "Cognome": localStorage.getItem(`Cognome${i}`),
                   "Email": localStorage.getItem(`Email${i}`),
                   "Telefono": localStorage.getItem(`Telefono${i}`),
+                  "CF": localStorage.getItem(`CF${i}`),
+                  "Residenza": localStorage.getItem(`Residenza${i}`),
                   "canale_di_vendita": localStorage.getItem(`Canale${i}`),
                   "valore_in_euro": localStorage.getItem(`Valore${i}`),
                   "Metodo di Pagamento": "stripe"

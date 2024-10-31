@@ -20,7 +20,7 @@
                 <div id="all" class="content">
                     <h6 id="title" class="mt-2 px-2 mx-2 mb-4">Compila il form, procedi con il pagamento, ricevi la tua tessera per l'evento!</h6> <!--mx-3-->
                     
-                    <form id="sheetdb-form">
+                    <form id="sheetdb-form" class="mb-4">
                         <div id="row-nome" class="row">
                             <div id="Nome">
                                 <!--<label class="form-label"></label>-->
@@ -45,7 +45,7 @@
                             </div>
                             <div id="invalid-email0" class="invalid ms-3 ps-5" style="display: none;"></div>
                         </div>
-                        <div id="phoneNumber" class="row mb-4">
+                        <div id="phoneNumber" class="row">
                             <div id="Phone" class="">
                                 <label class="form-label"></label>
                                 <div class="input-group">
@@ -54,6 +54,16 @@
                                 </div>
                             </div>
                             <div id="invalid-telefono0" class="invalid ms-3 ps-5" style="display: none;"></div>
+                        </div>
+                        <div id="CF" class="mt-4">
+                            <h2 class="form-label"></h2>
+                            <input id="input-CF0" type="text" class="form-control" name="CF" placeholder="Codice Fiscale" required>
+                            <div id="invalid-CF0" class="invalid" style="display: none;"></div>
+                        </div>
+                        <div id="residenza" class="mt-4 mb-4">
+                            <h2 class="form-label"></h2>
+                            <input id="input-residenza0" type="text" class="form-control" name="Residenza" placeholder="Indirizzo di residenza" required>
+                            <div id="invalid-residenza0" class="invalid" style="display: none;"></div>
                         </div>
             
                         <div id="formFriend"></div>
