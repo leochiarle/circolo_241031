@@ -102,7 +102,7 @@ function sheetdb(){
                   "Cognome": document.getElementById(`input-cognome${i}`).value,
                   "Email": document.getElementById(`input-email${i}`).value,
                   "Telefono": document.getElementById(`input-telefono${i}`).value,
-                  "CF": document.getElementById(`input-CF${i}`).value,
+                  "CF": document.getElementById(`input-CF${i}`).value.toUpperCase(),
                   "Residenza": document.getElementById(`input-residenza${i}`).value,
                   "canale_di_vendita": canaleDiVendita,
                   "valore_in_euro": "DEVE PAGARE"
@@ -152,7 +152,7 @@ function saveFormData(){
     localStorage.setItem(`Cognome${i}`, document.getElementById(`input-cognome${i}`).value)
     localStorage.setItem(`Email${i}`, document.getElementById(`input-email${i}`).value)
     localStorage.setItem(`Telefono${i}`, document.getElementById(`input-telefono${i}`).value)
-    localStorage.setItem(`CF${i}`, document.getElementById(`input-CF${i}`).value)
+    localStorage.setItem(`CF${i}`, document.getElementById(`input-CF${i}`).value.toUpperCase())
     localStorage.setItem(`Residenza${i}`, document.getElementById(`input-residenza${i}`).value)
     localStorage.setItem(`Canale${i}`, canaleDiVendita)
     localStorage.setItem(`Valore${i}`, prezzo)
