@@ -2,7 +2,7 @@
 
 let friendAdded = 0;
 let totPerson = 1;
-const prezzo = 2000;
+const prezzo = 20;
 let canaleDiVendita, valoreInEuro;
 //const stripe = Stripe('pk_test_51QAv6nBlOJumB3Tb4czFvyfDoho7mf8pFnS1GKHhoxygr18cvwBEzNZTnsAo2zFREw5ShDy9bDGAdXC4JENUy3SH00cyYldY4e');
 const stripe = Stripe('pk_live_51QAv6nBlOJumB3TbwzRFO14tmTkgA5QUj0FWnxCbF78IVvfg2LoPlH3yxvQmKn0ofSlocgjTrmHspbKKrxMC9Awq00VKm3xvdu');
@@ -121,7 +121,6 @@ async function createCheckout() {
         headers: {
           "Content-Type": "application/json",
         }, body: JSON.stringify({
-          prezzo: prezzo,
           totPerson: totPerson
         })
       });
