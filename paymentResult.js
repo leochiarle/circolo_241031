@@ -19,7 +19,7 @@ function sheetdb(){
   console.log(totPerson)
   for(let i = 0; i < totPerson; i++){
     console.log(i)
-    fetch('https://sheetdb.io/api/v1/w9iqfm0vgapyk', {
+    fetch('https://sheetdb.io/api/v1/fu50bgf6xw2j9', {
       method: 'POST',
       headers: {
           'Accept': 'application/json',
