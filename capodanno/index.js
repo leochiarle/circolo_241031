@@ -1,4 +1,4 @@
-const sheetDbUrl = "https://sheetdb.io/api/v1/yb2tampnfomo1"; // Replace with your SheetDB endpoint
+const sheetDbUrl = "https://sheetdb.io/api/v1/w9iqfm0vgapyk"; // Replace with your SheetDB endpoint
 
 async function initialization() {
   const urlParams = new URLSearchParams(window.location.search);
