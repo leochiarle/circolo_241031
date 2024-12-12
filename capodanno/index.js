@@ -49,12 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const response = await fetch(sheetDbUrl, {
-        method: 'PATCH',
+        method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({...data, _method="PATCH"})
       });
 
       if (response.ok) {
