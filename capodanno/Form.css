@@ -1,0 +1,185 @@
+
+#sheetdb-form{
+    width: 100%;
+}
+
+#link-pagamento{
+    color: #fff;
+}
+
+.card{
+    width: 50% !important;
+}
+
+@media screen and (max-width: 576px) {
+    .card {
+      width: 80% !important;
+    }
+  }
+
+
+.footer{
+    color: #fff;
+    background-color: #0d6efd;
+    padding: 10px 0 10px 0;
+}
+
+
+
+/*preso dal sito: https://codepen.io/joaqo89/pen/vYGLzqX */
+.wrapper {
+    min-height: 100vh;
+    color: #000;
+    font-family: 'Muli', sans-serif;
+    font-size: 1rem;
+    background-color: #F1E8E6;
+    display: -ms-grid;
+    display: grid;
+    place-items: center;
+  }
+  
+  .container {
+    background-color: #fff;
+    padding: 1em;
+    border-radius: 1em;
+    max-width: 768px;
+    display: -ms-grid;
+    display: grid;
+    place-items: center;
+    -webkit-box-shadow: 0px 17px 34px -20px #f55951;
+            box-shadow: 0px 17px 34px -20px #f55951;
+  }
+
+  @media screen and (max-width: 425px) {
+    .container {
+      border-radius: 0 0 1em 1em;
+    }
+  }
+  
+  .title {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  
+  .text {
+    font-size: 1rem;
+    margin-bottom: -0.2em;
+  }
+
+  .color{
+    color: #878787;
+  }
+  
+  .container {
+    max-width: 400px;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  @media screen and (max-width: 425px) {
+    .container {
+    max-width: 425px;
+    overflow: hidden;
+    padding: 0;
+  }
+  }
+  
+  .img {
+    width: 100%;
+    height: auto;
+    /*
+    border-radius: 1em 1em 0 0;
+    -o-object-fit: cover;
+       object-fit: cover;
+    
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    */
+  }
+  
+  .btn-custom{
+    background-color: #f1b3b0;
+    color: #fff;
+  }
+
+  .btn-custom:hover {
+    color: #fff;
+    background-color: #ff6859;
+    border-color: var(--bs-btn-hover-border-color);
+}
+
+  .img__container {
+    height: 200px;
+    margin-bottom: 2.5em;
+  }
+  
+  .title {
+    margin-bottom: 0.9em;
+  }
+  
+  .subtitle {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5em;
+    font-weight: 700;
+  }
+  
+  .content {
+    display: -ms-grid;
+    display: grid;
+    place-items: center;
+    padding: 0 1.5em;
+    margin-bottom: 2.5em;
+  }
+  
+  .mail {
+    padding: 0.5em 0 0.5em 1.5em;
+    line-height: 3;
+    width: 100%;
+    border: 1px solid #d9d9d9;
+    border-radius: 0.5em;
+    margin-bottom: 1em;
+  }
+  
+  ::-webkit-input-placeholder {
+    color: #111127;
+  }
+  
+  :-ms-input-placeholder {
+    color: #111127;
+  }
+  
+  ::-ms-input-placeholder {
+    color: #111127;
+  }
+  
+  ::placeholder {
+    color: #111127;
+  }
+  
+  .subscribe {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 700;
+    background-color: #f55951;
+    padding: 0.9em 0;
+    display: inline-block;
+    border: none;
+    border-radius: 0.5em;
+    width: 100%;
+    margin-bottom: 1.3em;
+  }
+  
+  .text {
+    font-size: 0.9rem;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .invalid{
+    width: 100%;
+    margin-top: .25rem;
+    font-size: .875em;
+    color: var(--bs-form-invalid-color);
+    text-align: left;
+  }
