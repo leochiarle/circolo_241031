@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
+    
     const uid = document.getElementById('uidField').value.trim();
 
     // Prepare data to PATCH or POST to SheetDB
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (response.ok) {
-        alert('Registrazione confermata. Grazie!');
+        window.location.href = "./result.html";
       } else {
         alert('Errore durante la registrazione. Riprova più tardi.');
       }
