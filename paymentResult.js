@@ -36,7 +36,10 @@ function sheetdb(){
                   "Residenza": localStorage.getItem(`Residenza${i}`),
                   "canale_di_vendita": localStorage.getItem(`Canale${i}`),
                   "valore_in_euro": localStorage.getItem(`Valore${i}`),
-                  "Metodo di Pagamento": "stripe"
+                  "Metodo di Pagamento": "stripe",
+                  "capodanno": "TRUE",
+                  "registration_time": localStorage.getItem("Date"),
+                  "source": "new"
               }]
       })
     })
