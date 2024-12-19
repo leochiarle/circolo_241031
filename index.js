@@ -105,7 +105,8 @@ function sheetdb(){
                   "CF": document.getElementById(`input-CF${i}`).value,
                   "Residenza": document.getElementById(`input-residenza${i}`).value,
                   "canale_di_vendita": canaleDiVendita,
-                  "valore_in_euro": "DEVE PAGARE"
+                  "valore_in_euro": "DEVE PAGARE",
+                  "First Event": "241231"
               }]
       })
     })

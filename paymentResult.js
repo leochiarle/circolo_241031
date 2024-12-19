@@ -39,7 +39,8 @@ function sheetdb(){
                   "Metodo di Pagamento": "stripe",
                   "capodanno": "TRUE",
                   "registration_time": localStorage.getItem("Date"),
-                  "source": "new"
+                  "source": "new",
+                  "First Event": "241231"
               }]
       })
     })
