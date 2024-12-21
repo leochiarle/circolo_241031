@@ -2,170 +2,120 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Form Iscrizione</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <link href="Form.css" rel="stylesheet">
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCo02yjDj24hu0HP3YBCJ9SNBdiNO2txwc&libraries=places&callback=initAutocomplete" async defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Form Iscrizione</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <link href="Form.css" rel="stylesheet">
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <!-- Removed the Google Maps Places API script since "residenza" is no longer needed 
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&libraries=places&callback=initAutocomplete" async defer></script> -->
+
 </head>
 
 <body onload="initialization()">
 
-    <div class="container text-center">
-        <div class="container">
-            <div class="img__container">
-                <img src="image/cover-fb.jpg" alt="Immagine Circolo limoni" class="img">
+  <div class="container text-center">
+    <div class="container">
+      <div class="img__container">
+        <img src="image/cover-fb.jpg" alt="Immagine Circolo limoni" class="img">
+      </div>
+      <div id="all" class="content">
+        <h6 id="title" class="mt-2 px-2 mx-2 mb-4">Compila il form, procedi con il pagamento, ricevi la tua
+          tessera ed entri a Capodanno!
+        </h6>
+        
+        <form id="sheetdb-form" class="mb-2">
+          <!-- Nome -->
+          <div id="row-nome" class="row">
+            <div id="Nome">
+              <input id="input-nome0" type="text" class="form-control" name="Nome" placeholder="Nome" required>
+              <div id="invalid-nome0" class="invalid" style="display: none;"></div>
             </div>
-            <div id="all" class="content">
-                <h6 id="title" class="mt-2 px-2 mx-2 mb-4">Compila il form, procedi con il pagamento, ricevi la tua
-                    tessera ed entri a Capodanno!</h6> <form id="sheetdb-form" class="mb-2">
-                    <div id="row-nome" class="row">
-                        <div id="Nome">
-                            <input id="input-nome0" type="text" class="form-control" name="Nome" placeholder="Nome"
-                                required>
-                            <div id="invalid-nome0" class="invalid" style="display: none;"></div>
-                        </div>
-                    </div>
-                    <div id="row-cognome" class="row">
-                        <div id="Cognome" class="">
-                            <label class="form-label"></label>
-                            <input id="input-cognome0" type="text" class="form-control" name="Cognome"
-                                placeholder="Cognome" required>
-                            <div id="invalid-cognome0" class="invalid" style="display: none;"></div>
-                        </div>
-                    </div>
-                    <div id="row-email" class="row">
-                        <div class="">
-                            <label class="form-label"></label>
-                            <div class="input-group">
-                                <span class="input-group-text">@</span>
-                                <input id="input-email0" type="email" class="form-control" name="Email"
-                                    placeholder="Email" required>
-                            </div>
-                        </div>
-                        <div id="invalid-email0" class="invalid ms-3 ps-5" style="display: none;"></div>
-                    </div>
-                    <div id="phoneNumber" class="row">
-                        <div id="Phone" class="">
-                            <label class="form-label"></label>
-                            <div class="input-group">
-                                <span class="input-group-text">+39</span>
-                                <input id="input-telefono0" type="tel" class="form-control" name="Telefono"
-                                    placeholder="Telefono" required>
-                            </div>
-                        </div>
-                        <div id="invalid-telefono0" class="invalid ms-3 ps-5" style="display: none;"></div>
-                    </div>
-                    <div id="CF" class="mt-4">
-                        <h2 class="form-label"></h2>
-                        <input id="input-CF0" type="text" class="form-control" name="CF" placeholder="Codice Fiscale"
-                            required>
-                        <div id="invalid-CF0" class="invalid" style="display: none;"></div>
-                    </div>
-                    <div id="residenza" class="mt-4 mb-4">
-                        <h2 class="form-label"></h2>
-                        <input id="input-residenza0" type="text" class="form-control" name="Residenza"
-                            placeholder="Indirizzo di residenza" required>
-                        <div id="invalid-residenza0" class="invalid" style="display: none;"></div>
-                    </div>
+          </div>
 
-                    <div id="formFriend"></div>
-
-                    <hr>
-
-                    <div id="friends-button" class="d-grid gap-2 mb-4">
-                        <button type="button" id="btn-addFriend" class="btn btn-custom mt-3"
-                            onclick="addFriend()">+ Aggiungi amico</button>
-                        <button type="button" id="btn-removeFriend" class="btn btn-custom mt-3"
-                            onclick="removeFriend()" style="display: none;">- Rimuovi amico</button>
-                    </div>
-
-                    <div id="pagamento" class="d-grid gap-2 mb-4">
-                        <button class="btn btn-primary btn-lg" type="button" onclick="payment()">Procedi al
-                            pagamento</button>
-                    </div>
-
-                    <input type="text" name="canale_di_vendita" id="vendita" value="" style="display: none;">
-                    <input type="number" name="valore_in_euro" id="valore" value="" style="display: none;">
-                    <input type="text" name="Date" id="Date" value="" style="display: none;">
-
-                    <button id="btn-submit" class="btn btn-primary btn-lg" type="submit"
-                        style="display: none;">Submit</button>
-
-                </form>
-
-                <div id="checkout" class="mb-4"></div>
-                <p class="text color mb-3 px-5">Cliccando "Procedi al pagamento" si accettano <a class="color"
-                        href="/terminicondizioni.html">termini e condizioni</a></p>
-
-                <div class="mb-3 container-fluid">
-                    <p class="text">🍋✨circolo limoni APS✨🍋</p>
-                </div>
-
-                <p class="text color">x info: <a class="color"
-                        href="mailto:ciao@circololimoni.it">ciao@circololimoni.it</a></p>
-
+          <!-- Cognome -->
+          <div id="row-cognome" class="row">
+            <div id="Cognome" class="">
+              <label class="form-label"></label>
+              <input id="input-cognome0" type="text" class="form-control" name="Cognome" placeholder="Cognome" required>
+              <div id="invalid-cognome0" class="invalid" style="display: none;"></div>
             </div>
+          </div>
+
+          <!-- Email -->
+          <div id="row-email" class="row">
+            <div class="">
+              <label class="form-label"></label>
+              <div class="input-group">
+                <span class="input-group-text">@</span>
+                <input id="input-email0" type="email" class="form-control" name="Email" placeholder="Email" required>
+              </div>
+            </div>
+            <div id="invalid-email0" class="invalid ms-3 ps-5" style="display: none;"></div>
+          </div>
+
+          <!-- Telefono -->
+          <div id="phoneNumber" class="row">
+            <div id="Phone" class="">
+              <label class="form-label"></label>
+              <div class="input-group">
+                <span class="input-group-text">+39</span>
+                <input id="input-telefono0" type="tel" class="form-control" name="Telefono" placeholder="Telefono" required>
+              </div>
+            </div>
+            <div id="invalid-telefono0" class="invalid ms-3 ps-5" style="display: none;"></div>
+          </div>
+
+          <!-- Removed CF and Residenza fields -->
+          <!-- <div id="CF"> ... </div> -->
+          <!-- <div id="residenza"> ... </div> -->
+
+          <div id="formFriend"></div>
+
+          <hr>
+
+          <!-- Buttons to add/remove friend -->
+          <div id="friends-button" class="d-grid gap-2 mb-4">
+            <button type="button" id="btn-addFriend" class="btn btn-custom mt-3" onclick="addFriend()">+ Aggiungi amico</button>
+            <button type="button" id="btn-removeFriend" class="btn btn-custom mt-3" onclick="removeFriend()" style="display: none;">- Rimuovi amico</button>
+          </div>
+
+          <!-- Pagamento -->
+          <div id="pagamento" class="d-grid gap-2 mb-4">
+            <button class="btn btn-primary btn-lg" type="button" onclick="payment()">
+              Procedi al pagamento
+            </button>
+          </div>          
+
+          <!-- Hidden inputs -->
+          <input type="text" name="canale_di_vendita" id="vendita" value="" style="display: none;">
+          <input type="number" name="valore_in_euro" id="valore" value="" style="display: none;">
+          <input type="text" name="Date" id="Date" value="" style="display: none;">
+
+          <!-- Real form submission hidden -->
+          <button id="btn-submit" class="btn btn-primary btn-lg" type="submit" style="display: none;">Submit</button>
+
+        </form>
+
+        <div id="checkout" class="mb-4"></div>
+        <p class="text color mb-3 px-5">
+          Cliccando "Procedi al pagamento" si accettano <a class="color" href="/terminicondizioni.html">termini e condizioni</a>
+        </p>
+
+        <div class="mb-3 container-fluid">
+          <p class="text">🍋✨circolo limoni APS✨🍋</p>
         </div>
+        <p class="text color">x info: <a class="color" href="mailto:ciao@circololimoni.it">ciao@circololimoni.it</a></p>
+      </div>
     </div>
+  </div>
 
-
-    <script>
-        let autocomplete;
-
-        function initAutocomplete() {
-            autocomplete = new google.maps.places.Autocomplete(
-                document.getElementById('input-residenza0'),
-                {
-                    types: ['address'], // Restrict to addresses only
-                    componentRestrictions: { 'country': ['IT'] }, // Limit to Italy, adjust if needed
-                    fields: ['address_components', 'formatted_address'] // Specify data to retrieve
-                }
-            );
-
-            autocomplete.addListener('place_changed', onPlaceChanged);
-        }
-
-        function onPlaceChanged() {
-            let place = autocomplete.getPlace();
-
-            if (!place.geometry) {
-                // User entered the name of a Place that was not suggested and
-                // pressed the Enter key, or the Place Details request failed.
-                document.getElementById('input-residenza0').placeholder = 'Inserisci un indirizzo valido';
-                return;
-            }
-
-            // Autofill the address in your form. You can adjust this part
-            // based on how you want to use the address components.
-            document.getElementById('input-residenza0').value = place.formatted_address;
-
-            // Example of extracting individual address components:
-            // let streetNumber, route, locality, administrativeArea, country, postalCode;
-            // for (const component of place.address_components) {
-            //     const componentType = component.types[0];
-            //     switch (componentType) {
-            //         case "street_number":
-            //             streetNumber = component.long_name;
-            //             break;
-            //         case "route":
-            //             route = component.long_name;
-            //             break;
-            //         case "locality":
-            //             locality = component.long_name;
-            //             break;
-            //         // ... and so on for other components
-            //     }
-            // }
-        }
-    </script>
-    <script src="index.js" type="text/javascript"></script>
+  <!-- Include your custom JS last -->
+  <script src="index.js" type="text/javascript"></script>
 </body>
-
 </html>
