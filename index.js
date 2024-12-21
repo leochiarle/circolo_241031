@@ -186,7 +186,7 @@ function addFriend() {
   newFormFriend.id = `formFriend${friendAdded}`;
 
   newFormFriend.innerHTML = `
-    <p id="friendNumber${friendAdded}" class="mt-5 mb-3 fw-bold fs-5">Friend number ${friendAdded}:</p>
+    <p id="friendNumber${friendAdded}" class="mt-5 mb-3 fw-bold fs-5">Amicə ${friendAdded}:</p>
     <div id="row-nome${friendAdded}" class="row">
       <div id="Nome${friendAdded}">
         <label class="form-label"></label>
