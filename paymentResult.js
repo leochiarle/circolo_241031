@@ -1,48 +1,54 @@
+/********************************
+ * paymentResult.js
+ ********************************/
 let checkoutId;
-let result;
 let totPerson;
 
-async function initialization(){
+async function initialization() {
   const urlParams = new URLSearchParams(window.location.search);
-  checkoutId = urlParams.get('session_id');
-  totPerson = localStorage.getItem("totPerson")
+  checkoutId = urlParams.get('session_id'); // Stripe session ID if needed
+  totPerson = localStorage.getItem("totPerson");
+  
+  // We PATCH each person's row to mark them as PAID
+  await patchPaidRows();
 
-  sheetdb();
-
+  // Now it’s safe to clear localStorage
   localStorage.clear();
 }
 
+/**
+ * PATCH each row in SheetDB using the previously-stored UID.
+ */
+async function patchPaidRows() {
+  for (let i = 0; i < totPerson; i++) {
+    const uid = localStorage.getItem(`UID${i}`); 
+    const paidVal = localStorage.getItem(`Valore${i}`) || "20";
+    console.log(`Patching UID ${uid} to set valore_in_euro=${paidVal}`);
 
-function sheetdb(){
-  console.log(totPerson)
-  for(let i = 0; i < totPerson; i++){
-    console.log(i)
-    fetch('https://sheetdb.io/api/v1/fu50bgf6xw2j9', {
-      method: 'POST',
+    // Build the PATCH body
+    const patchBody = {
+      data: [
+        {
+          "valore_in_euro": paidVal, 
+          "Metodo di Pagamento": "stripe",
+          "capodanno": "TRUE", // or your logic
+          "registration_time": localStorage.getItem("Date")
+        }
+      ]
+    };
+
+    const searchQuery = `?search={"UID":"${uid}"}`;
+
+    const response = await fetch('https://sheetdb.io/api/v1/fu50bgf6xw2j9' + searchQuery, {
+      method: 'PATCH',
       headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-          data: [{
-                  "Date": localStorage.getItem("Date"),
-                  "Nome": localStorage.getItem(`Nome${i}`),
-                  "Cognome": localStorage.getItem(`Cognome${i}`),
-                  "Email": localStorage.getItem(`Email${i}`),
-                  "Telefono": localStorage.getItem(`Telefono${i}`),
-                //"CF": localStorage.getItem(`CF${i}`),
-                //"Residenza": localStorage.getItem(`Residenza${i}`),
-                  "canale_di_vendita": localStorage.getItem(`Canale${i}`),
-                  "valore_in_euro": localStorage.getItem(`Valore${i}`),
-                  "Metodo di Pagamento": "stripe",
-                  "capodanno": "TRUE",
-                  "registration_time": localStorage.getItem("Date"),
-                  "source": "new",
-                  "First Event": "241231"
-              }]
-      })
-    })
-    .then((response) => response.json())
-    .then((data) => console.log(data));
+      body: JSON.stringify(patchBody)
+    });
+
+    const data = await response.json();
+    console.log("PATCH response for UID:", uid, data);
   }
 }
