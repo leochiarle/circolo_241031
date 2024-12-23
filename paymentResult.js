@@ -25,30 +25,26 @@ async function patchPaidRows() {
     const paidVal = localStorage.getItem(`Valore${i}`) || "20";
     console.log(`Patching UID ${uid} to set valore_in_euro=${paidVal}`);
 
-    // Build the PATCH body
-    const patchBody = {
-      data: [
-        {
-          "valore_in_euro": paidVal, 
-          "Metodo di Pagamento": "stripe",
-          "capodanno": "TRUE", // or your logic
-          "registration_time": localStorage.getItem("Date")
-        }
-      ]
+     // Prepare data to PATCH or POST to SheetDB
+     const data = {
+      valore_in_euro : paidVal, 
+      Metodo di Pagamento : "stripe",
+      capodanno : "TRUE", // or your logic
+      registration_time : localStorage.getItem("Date")
+      }
     };
 
-    const searchQuery = `?search={"UID":"${uid}"}`;
+    const endpointUrl =`https://sheetdb.io/api/v1/w9iqfm0vgapyk/UID/${uid}`;
 
-    const response = await fetch('https://sheetdb.io/api/v1/fu50bgf6xw2j9' + searchQuery, {
+    const response = await fetch(endpointUrl, {
       method: 'PATCH',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(patchBody)
+      body: JSON.stringify(data)
     });
 
     const data = await response.json();
     console.log("PATCH response for UID:", uid, data);
   }
-}
