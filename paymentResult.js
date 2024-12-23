@@ -1,5 +1,3 @@
-
-
 let checkoutId;
 let result;
 let totPerson;
@@ -48,6 +46,3 @@ function sheetdb(){
     .then((data) => console.log(data));
   }
 }
-
-
-
