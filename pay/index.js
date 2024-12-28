@@ -1,15 +1,15 @@
 /************************************************************
- * pay.js
+ * index.js
  ************************************************************/
 const stripe = Stripe('pk_live_51QAv6nBlOJumB3TbwzRFO14tmTkgA5QUj0FWnxCbF78IVvfg2LoPlH3yxvQmKn0ofSlocgjTrmHspbKKrxMC9Awq00VKm3xvdu');
 
 async function initialization() {
   // 1) Get the 'uid' from the URL
   const urlParams = new URLSearchParams(window.location.search);
-  const uid = urlParams.get('uid'); // e.g., "AB123"
+  const uid = urlParams.get('uid');
 
   if (!uid) {
-    document.getElementById('error-message').textContent = 
+    document.getElementById('error-message').textContent =
       "Manca il parametro UID. Non posso completare il pagamento.";
     document.getElementById('error-message').style.display = "block";
     return;
@@ -28,24 +28,22 @@ async function initialization() {
 
   } catch (error) {
     console.error("Initialization error:", error);
-    document.getElementById('error-message').textContent = 
+    document.getElementById('error-message').textContent =
       "Si è verificato un errore durante la preparazione del pagamento.";
     document.getElementById('error-message').style.display = "block";
   }
 }
 
 /**
- * Creates a Stripe Checkout Session on your server,
- * passing 'uid' so that you know which row in the sheet to patch after payment.
+ * Creates a Stripe Checkout Session on your server.
  */
 async function createCheckoutSession(uid) {
-  // Replace with your actual server URL
   const response = await fetch("https://circolo-server-private.onrender.com/create-checkout-session", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      uid: uid, 
-      // or any other data needed (e.g. totPerson, price, etc.)
+      uid: uid,
+      // totPerson is still optional on this page
     })
   });
 
@@ -54,7 +52,6 @@ async function createCheckoutSession(uid) {
   }
 
   const data = await response.json();
-  // Expect { clientSecret: "..." } from your server
   return data.clientSecret;
 }
 
@@ -62,16 +59,12 @@ async function createCheckoutSession(uid) {
  * Mount the Stripe Embedded Checkout using the fetched clientSecret.
  */
 async function mountStripeCheckout(clientSecret) {
-  // Initialize the embedded checkout
+  // Initialize the embedded checkout - REMOVE the appearance option
   const checkout = await stripe.initEmbeddedCheckout({
     clientSecret,
-    appearance: {
-      theme: 'stripe' 
-      // or 'night', 'flat', etc.
-    }
-    // Additional config if needed
+    // NO appearance parameter here
   });
 
-  // Mount the checkout inside the #checkout div
+  // Mount the checkout
   checkout.mount('#checkout');
 }
