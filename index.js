@@ -101,6 +101,7 @@ async function postUnpaidRows() {
     // If we haven't generated a UID yet, do it now
     let uid = generateUID(nome, cognome, email, telefono);
     localStorage.setItem(`UID${i}`, uid);
+    localStorage.setItem(`Valore${i}`, prezzo);
 
     const postBody = {
       data: [
@@ -117,7 +118,7 @@ async function postUnpaidRows() {
           "capodanno": "",
           "registration_time": localStorage.getItem("Date"),
           "source": "new",
-          "First Event": "241231"
+          "First Event": "250208"
         }
       ]
     };
