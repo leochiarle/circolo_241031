@@ -22,7 +22,7 @@ async function initialization() {
 async function patchPaidRows() {
   for (let i = 0; i < totPerson; i++) {
     const uid = localStorage.getItem(`UID${i}`);
-    const paidVal = localStorage.getItem(`Valore${i}`) || "10"; // Consider making this dynamic
+    const paidVal = localStorage.getItem(`Valore${i}`) || "21"; // Consider making this dynamic
     console.log(`Patching UID ${uid} to set valore_in_euro=${paidVal}`);
 
     // Prepare data to PATCH or POST to SheetDB
