@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Prepare data to PATCH or POST to SheetDB
     const data = {
         UID: uid,
-        capodanno: "TRUE",
+        carnevale: "TRUE",
         registration_time: dateNow(),
         source: window.formSource || 'unknown'
     };

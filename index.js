@@ -115,10 +115,10 @@ async function postUnpaidRows() {
           "canale_di_vendita": localStorage.getItem(`Canale${i}`),
           "valore_in_euro": "DEVE PAGARE",
           "Metodo di Pagamento": "",
-          "capodanno": "",
+          "carnevale": "",
           "registration_time": localStorage.getItem("Date"),
           "source": "new",
-          "First Event": "250208"
+          "First Event": "250301"
         }
       ]
     };

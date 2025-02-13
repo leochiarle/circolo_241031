@@ -29,7 +29,7 @@ async function patchPaidRows() {
     const patchData = {
       valore_in_euro: paidVal,
       "Metodo di Pagamento": "stripe",
-      capodanno: "TRUE", // or your logic
+      carnevale: "TRUE", // or your logic
       registration_time: localStorage.getItem("Date")
     };
 
