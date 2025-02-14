@@ -6,7 +6,7 @@ const stripe = Stripe('pk_live_51QAv6nBlOJumB3TbwzRFO14tmTkgA5QUj0FWnxCbF78IVvfg
 
 async function initialization() {
   const urlParams = new URLSearchParams(window.location.search);
-  canaleDiVendita = urlParams.get('ncdhsdskfdnd');
+  canaleDiVendita = urlParams.get('src');
   valoreInEuro = urlParams.get('riekndaocno');
 
   document.getElementById('vendita').value = canaleDiVendita;
