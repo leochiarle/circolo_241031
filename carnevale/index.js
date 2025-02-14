@@ -2,7 +2,7 @@
 async function initialization() {
   const urlParams = new URLSearchParams(window.location.search);
   const uid = urlParams.get('uid') || '';
-  const source = urlParams.get('source') || 'unknown';
+  const source = urlParams.get('src') || 'unknown';
 
   // Set UID field value
   const uidField = document.getElementById('uidField');
