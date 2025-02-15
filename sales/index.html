@@ -5,10 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sales Dashboard</title>
   <style>
-    :root {
-      --accent-yellow: #FFD700;
-      --accent-red: #FF4500;
-    }
     body {
       font-family: sans-serif;
       background: #f9f9f9;
@@ -22,7 +18,6 @@
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      border-top: 4px solid var(--accent-yellow);
     }
     .cover {
       width: 100%;
@@ -30,7 +25,7 @@
       margin-bottom: 20px;
     }
     h1 {
-      color: var(--accent-red);
+      color: #333;
       margin: 10px 0;
     }
     h2 {
@@ -91,11 +86,11 @@
     } else {
       prNameSubTitle.textContent = 'PR: ' + prName;
       
-      const sheetDBId = 'w9iqfm0vgapyk'; // Replace with your SheetDB ID if needed
+      const sheetDBId = 'w9iqfm0vgapyk'; // Replace with your SheetDB ID
       const sheetName = '2024_CIRCOLO_TESSERATI';
       
       // Build the API URL using the /search endpoint.
-      const apiUrl = `https://sheetdb.io/api/v1/${sheetDBId}/search?sheet=${encodeURIComponent(sheetName)}&canale_di_vendita=${encodeURIComponent(prName)}&First%20Event=250301`;
+      const apiUrl = https://sheetdb.io/api/v1/${sheetDBId}/search?sheet=${encodeURIComponent(sheetName)}&canale_di_vendita=${encodeURIComponent(prName)}&First%20Event=250301;
 
       fetch(apiUrl)
         .then(response => response.json())
@@ -105,21 +100,21 @@
           const ticketCount = validSales.length;
           const commission = ticketCount * 3; // 3€ per valid ticket
 
-          let html = `
+          let html = 
             <p class="result">Tickets sold: <strong>${ticketCount}</strong></p>
             <p class="result">Commission earned: <strong>€${commission}</strong></p>
-          `;
+          ;
           
           // List each ticket's UID and valore_in_euro
           if(ticketCount > 0) {
-            html += `<div class="ticket-list">
+            html += <div class="ticket-list">
                         <h3>Ticket Details</h3>
-                        <ul>`;
+                        <ul>;
             validSales.forEach(ticket => {
-              html += `<li>UID: <strong>${ticket.UID}</strong> - Value: <strong>${ticket.valore_in_euro}</strong></li>`;
+              html += <li>UID: <strong>${ticket.UID}</strong> - Value: <strong>${ticket.valore_in_euro}</strong></li>;
             });
-            html += `   </ul>
-                     </div>`;
+            html +=    </ul>
+                     </div>;
           }
           
           contentDiv.innerHTML = html;
