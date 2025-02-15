@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -39,13 +39,12 @@
     </div>
   </div>
   <script>
-    // Helper: get URL parameter by name
+    // Get URL parameter
     function getQueryParam(name) {
       const params = new URLSearchParams(window.location.search);
       return params.get(name);
     }
 
-    // Use "src" as the PR name parameter
     const prName = getQueryParam('src');
     const contentDiv = document.getElementById('content');
 
@@ -54,19 +53,23 @@
     } else {
       const sheetDBId = 'w9iqfm0vgapyk'; // Replace with your SheetDB ID
       const sheetName = '2024_CIRCOLO_TESSERATI';
-      
-      // Build API URL. This query searches for rows where:
-      // - "canale_di_vendita" equals the prName
-      // - "First Event" equals "250301"
-      const apiUrl = `https://sheetdb.io/api/v1/${sheetDBId}?sheet=${encodeURIComponent(sheetName)}&search[canale_di_vendita]=${encodeURIComponent(prName)}&search[First Event]=250301`;
-      
+
+      // Build a JSON search query to filter by pr name and event code.
+      const queryObj = {
+        "canale_di_vendita": prName,
+        "First Event": "250301"
+      };
+      const queryParam = encodeURIComponent(JSON.stringify(queryObj));
+
+      const apiUrl = `https://sheetdb.io/api/v1/${sheetDBId}?sheet=${encodeURIComponent(sheetName)}&search=${queryParam}`;
+
       fetch(apiUrl)
         .then(res => res.json())
         .then(data => {
           // Filter out tickets with "DEVE PAGARE" in "valore_in_euro"
           const validSales = data.filter(row => row.valore_in_euro.trim().toUpperCase() !== 'DEVE PAGARE');
           const ticketCount = validSales.length;
-          const commission = ticketCount * 3; // 3€ per ticket
+          const commission = ticketCount * 3; // 3€ commission per valid ticket
 
           contentDiv.innerHTML = `
             <p class="result">Tickets sold: <strong>${ticketCount}</strong></p>
