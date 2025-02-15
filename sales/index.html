@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,34 +27,37 @@
 <body>
   <div class="container">
     <h1>Sales Dashboard</h1>
-    <div id="content"></div>
+    <div id="content">
+      <!-- Sales data will appear here -->
+    </div>
   </div>
   <script>
-    // Get URL parameter function
+    // Get URL parameter
     function getQueryParam(name) {
       const params = new URLSearchParams(window.location.search);
       return params.get(name);
     }
-    
+
     const prName = getQueryParam('pr');
     const contentDiv = document.getElementById('content');
-    
+
     if (!prName) {
       contentDiv.innerHTML = '<p class="error">PR name not specified in URL.</p>';
     } else {
-      const sheetDBId = 'w9iqfm0vgapyk'; // Replace with your actual SheetDB ID
+      const sheetDBId = 'w9iqfm0vgapyk'; // Replace with your SheetDB ID
       const sheetName = '2024_CIRCOLO_TESSERATI';
       
-      // Fully URL-encode the search parameter keys:
-      const apiUrl = `https://sheetdb.io/api/v1/${sheetDBId}?sheet=${encodeURIComponent(sheetName)}&search?canale_di_vendita=${encodeURIComponent(prName)}&First%20Event=250301`;
-      
+      // Build the API URL using the /search endpoint.
+      // Replace spaces in the column name "First Event" with %20
+      const apiUrl = `https://sheetdb.io/api/v1/${sheetDBId}/search?sheet=${encodeURIComponent(sheetName)}&canale_di_vendita=${encodeURIComponent(prName)}&First%20Event=250301`;
+
       fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-          // Filter out rows where "valore_in_euro" equals "DEVE PAGARE"
+          // Filter out rows with "DEVE PAGARE" in "valore_in_euro"
           const validSales = data.filter(row => row.valore_in_euro.trim().toUpperCase() !== 'DEVE PAGARE');
           const ticketCount = validSales.length;
-          const commission = ticketCount * 3; // 3€ commission per ticket
+          const commission = ticketCount * 3; // 3€ per valid ticket
 
           contentDiv.innerHTML = `
             <p class="result">Tickets sold: <strong>${ticketCount}</strong></p>
