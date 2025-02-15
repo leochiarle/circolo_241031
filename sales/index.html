@@ -46,7 +46,7 @@
       const sheetName = '2024_CIRCOLO_TESSERATI';
       
       // Fully URL-encode the search parameter keys:
-      const apiUrl = `https://sheetdb.io/api/v1/${sheetDBId}?sheet=${encodeURIComponent(sheetName)}&search%5Bcanale_di_vendita%5D=${encodeURIComponent(prName)}&search%5BFirst%20Event%5D=250301`;
+      const apiUrl = `https://sheetdb.io/api/v1/${sheetDBId}?sheet=${encodeURIComponent(sheetName)}&search?canale_di_vendita=${encodeURIComponent(prName)}&First%20Event=250301`;
       
       fetch(apiUrl)
         .then(response => response.json())
