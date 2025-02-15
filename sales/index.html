@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sales Dashboard</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f9f9f9;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      background: #fff;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+    }
+    .result {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sales Dashboard</h1>
+    <div id="content">
+      <!-- Sales data will appear here -->
+    </div>
+  </div>
+  <script>
+    // Helper: get URL parameter by name
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    // Use "src" as the PR name parameter
+    const prName = getQueryParam('src');
+    const contentDiv = document.getElementById('content');
+
+    if (!prName) {
+      contentDiv.innerHTML = '<p class="error">PR name not specified in URL.</p>';
+    } else {
+      const sheetDBId = 'w9iqfm0vgapyk'; // Replace with your SheetDB ID
+      const sheetName = '2024_CIRCOLO_TESSERATI';
+      
+      // Build API URL. This query searches for rows where:
+      // - "canale_di_vendita" equals the prName
+      // - "First Event" equals "250301"
+      const apiUrl = `https://sheetdb.io/api/v1/${sheetDBId}?sheet=${encodeURIComponent(sheetName)}&search[canale_di_vendita]=${encodeURIComponent(prName)}&search[First Event]=250301`;
+      
+      fetch(apiUrl)
+        .then(res => res.json())
+        .then(data => {
+          // Filter out tickets with "DEVE PAGARE" in "valore_in_euro"
+          const validSales = data.filter(row => row.valore_in_euro.trim().toUpperCase() !== 'DEVE PAGARE');
+          const ticketCount = validSales.length;
+          const commission = ticketCount * 3; // 3€ per ticket
+
+          contentDiv.innerHTML = `
+            <p class="result">Tickets sold: <strong>${ticketCount}</strong></p>
+            <p class="result">Commission earned: <strong>€${commission}</strong></p>
+          `;
+        })
+        .catch(err => {
+          console.error('Fetch error:', err);
+          contentDiv.innerHTML = '<p class="error">Error fetching sales data. Please try again later.</p>';
+        });
+    }
+  </script>
+</body>
+</html>
