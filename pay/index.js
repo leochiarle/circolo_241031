@@ -15,6 +15,13 @@ async function initialization() {
     return;
   }
 
+  // 1a) Store the UID (and other data) in localStorage so paymentResult.js can PATCH it
+  // Adjust these values as needed for your situation:
+  localStorage.setItem('totPerson', 1);   // or however many tickets
+  localStorage.setItem('UID0', uid);
+  localStorage.setItem('Valore0', '21');  // or your actual ticket price
+  localStorage.setItem('Date', new Date().toISOString());
+
   try {
     // 2) Request clientSecret from your server
     const clientSecret = await createCheckoutSession(uid);
@@ -43,7 +50,7 @@ async function createCheckoutSession(uid) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       uid: uid,
-      // totPerson is still optional on this page
+      // totPerson is still optional on this page if you want to pass it through
     })
   });
 
@@ -59,12 +66,12 @@ async function createCheckoutSession(uid) {
  * Mount the Stripe Embedded Checkout using the fetched clientSecret.
  */
 async function mountStripeCheckout(clientSecret) {
-  // Initialize the embedded checkout - REMOVE the appearance option
+  // Initialize the embedded checkout
   const checkout = await stripe.initEmbeddedCheckout({
     clientSecret,
-    // NO appearance parameter here
+    // No appearance object if you're using the default look
   });
 
-  // Mount the checkout
+  // Mount the checkout into our #checkout div
   checkout.mount('#checkout');
 }
