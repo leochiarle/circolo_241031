@@ -90,7 +90,7 @@
       const sheetName = '2024_CIRCOLO_TESSERATI';
       
       // Build the API URL using the /search endpoint.
-      const apiUrl = https://sheetdb.io/api/v1/${sheetDBId}/search?sheet=${encodeURIComponent(sheetName)}&canale_di_vendita=${encodeURIComponent(prName)}&First%20Event=250301;
+      const apiUrl = `https://sheetdb.io/api/v1/${sheetDBId}/search?sheet=${encodeURIComponent(sheetName)}&canale_di_vendita=${encodeURIComponent(prName)}&First%20Event=250301`;
 
       fetch(apiUrl)
         .then(response => response.json())
@@ -100,21 +100,21 @@
           const ticketCount = validSales.length;
           const commission = ticketCount * 3; // 3€ per valid ticket
 
-          let html = 
+          let html = `
             <p class="result">Tickets sold: <strong>${ticketCount}</strong></p>
             <p class="result">Commission earned: <strong>€${commission}</strong></p>
-          ;
+          `;
           
           // List each ticket's UID and valore_in_euro
           if(ticketCount > 0) {
-            html += <div class="ticket-list">
+            html += `<div class="ticket-list">
                         <h3>Ticket Details</h3>
-                        <ul>;
+                        <ul>`;
             validSales.forEach(ticket => {
-              html += <li>UID: <strong>${ticket.UID}</strong> - Value: <strong>${ticket.valore_in_euro}</strong></li>;
+              html += `<li>Data: <strong>${ticket.Date}</strong> - Nome: <strong>${ticket.Nome} ${ticket.Cognome}</strong></li>`;
             });
-            html +=    </ul>
-                     </div>;
+            html += `   </ul>
+                     </div>`;
           }
           
           contentDiv.innerHTML = html;
