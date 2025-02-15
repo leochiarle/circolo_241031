@@ -19,7 +19,7 @@ async function initialization() {
   // Adjust these values as needed for your situation:
   localStorage.setItem('totPerson', 1);   // or however many tickets
   localStorage.setItem('UID0', uid);
-  localStorage.setItem('Valore0', '21');  // or your actual ticket price
+  localStorage.setItem('Valore0', '10');  // or your actual ticket price
   localStorage.setItem('Date', new Date().toISOString());
 
   try {
