@@ -19,20 +19,59 @@
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    h1 { color: #333; }
-    .result { font-size: 1.2em; margin: 10px 0; }
-    .error { color: red; }
+    .cover {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      color: #333;
+      margin: 10px 0;
+    }
+    h2 {
+      color: #555;
+      margin-bottom: 20px;
+    }
+    .result {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+    .ticket-list {
+      text-align: left;
+      margin-top: 20px;
+      border-top: 1px solid #ddd;
+      padding-top: 10px;
+    }
+    .ticket-list ul {
+      list-style: none;
+      padding: 0;
+    }
+    .ticket-list li {
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .error {
+      color: red;
+    }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- Image container -->
+    <img src="https://circololimoni.it/image/cover-444px.jpg" alt="Cover Image" class="cover">
+    
+    <!-- Title -->
     <h1>Sales Dashboard</h1>
-    <div id="content">
-      <!-- Sales data will appear here -->
-    </div>
+    
+    <!-- Subtitle showing PR name -->
+    <h2 id="prNameSubTitle"></h2>
+    
+    <!-- Sales data content -->
+    <div id="content"></div>
   </div>
+  
   <script>
-    // Get URL parameter
+    // Get URL parameter helper
     function getQueryParam(name) {
       const params = new URLSearchParams(window.location.search);
       return params.get(name);
@@ -40,15 +79,17 @@
 
     const prName = getQueryParam('pr');
     const contentDiv = document.getElementById('content');
-
+    const prNameSubTitle = document.getElementById('prNameSubTitle');
+    
     if (!prName) {
       contentDiv.innerHTML = '<p class="error">PR name not specified in URL.</p>';
     } else {
+      prNameSubTitle.textContent = 'PR: ' + prName;
+      
       const sheetDBId = 'w9iqfm0vgapyk'; // Replace with your SheetDB ID
       const sheetName = '2024_CIRCOLO_TESSERATI';
       
       // Build the API URL using the /search endpoint.
-      // Replace spaces in the column name "First Event" with %20
       const apiUrl = `https://sheetdb.io/api/v1/${sheetDBId}/search?sheet=${encodeURIComponent(sheetName)}&canale_di_vendita=${encodeURIComponent(prName)}&First%20Event=250301`;
 
       fetch(apiUrl)
@@ -59,10 +100,24 @@
           const ticketCount = validSales.length;
           const commission = ticketCount * 3; // 3€ per valid ticket
 
-          contentDiv.innerHTML = `
+          let html = `
             <p class="result">Tickets sold: <strong>${ticketCount}</strong></p>
             <p class="result">Commission earned: <strong>€${commission}</strong></p>
           `;
+          
+          // List each ticket's UID and valore_in_euro
+          if(ticketCount > 0) {
+            html += `<div class="ticket-list">
+                        <h3>Ticket Details</h3>
+                        <ul>`;
+            validSales.forEach(ticket => {
+              html += `<li>UID: <strong>${ticket.UID}</strong> - Value: <strong>${ticket.valore_in_euro}</strong></li>`;
+            });
+            html += `   </ul>
+                     </div>`;
+          }
+          
+          contentDiv.innerHTML = html;
         })
         .catch(error => {
           console.error('Error fetching data:', error);
