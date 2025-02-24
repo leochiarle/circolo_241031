@@ -1,6 +1,6 @@
 let friendAdded = 0;
 let totPerson = 1;
-const prezzo = 10;
+const prezzo = 15;
 let canaleDiVendita, valoreInEuro;
 const stripe = Stripe('pk_live_51QAv6nBlOJumB3TbwzRFO14tmTkgA5QUj0FWnxCbF78IVvfg2LoPlH3yxvQmKn0ofSlocgjTrmHspbKKrxMC9Awq00VKm3xvdu');
 
