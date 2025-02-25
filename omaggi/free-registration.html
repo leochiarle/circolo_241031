@@ -12,7 +12,7 @@
         crossorigin="anonymous"></script>
     <link href="Form.css" rel="stylesheet"> </head>
 
-<body>
+<body onload="initialization()">
 
     <div class="container text-center">
         <div class="container">
@@ -76,13 +76,13 @@
                         <button type="button" id="btn-removeFriend" class="btn btn-custom mt-3" onclick="removeFriend()"
                             style="display: none;">- Rimuovi amicə</button>
                     </div>
-
-                    <input type="text" name="canale_di_vendita" id="vendita" value="circololimoni" style="display: none;">
+                    <input type="text" name="canale_di_vendita" id="vendita" value="" style="display: none;">
                      <input type="text" name="Date" id="Date" value="" style="display: none;">
-                    <input type="text" name="valore_in_euro" id="valore" value="0" style="display: none;"><button class="btn btn-primary btn-lg" type="button" onclick="registerFree()">
+                    <input type="text" name="valore_in_euro" id="valore" value="0" style="display: none;">
+
+                    <button class="btn btn-primary btn-lg" type="button" onclick="registerFree()">
                         Registrati
                     </button>
-
                 </form>
 
                 <p class="text color mb-3 px-5">
