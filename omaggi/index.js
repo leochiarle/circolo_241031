@@ -5,7 +5,7 @@ let canaleDiVendita, valoreInEuro;
 function initialization(){
 
   const urlParams = new URLSearchParams(window.location.search);
-  canaleDiVendita = urlParams.get('ncdhsdskfdnd');
+  canaleDiVendita = urlParams.get('src');
   valoreInEuro = urlParams.get('riekndaocno');
 
   document.getElementById('vendita').value = canaleDiVendita;
@@ -55,7 +55,9 @@ function sheetdb(){
                 "Email": document.getElementById(`input-email0`).value,
                 "Telefono": document.getElementById(`input-telefono0`).value,
                 "Metodo di Pagamento": "omaggio",
-                "valore_in_euro": 0
+                "canale_di_vendita": "omaggio " + canaleDiVendita,
+                "valore_in_euro": 0,
+                "First Event": "250301"
             }]
     })
   })
