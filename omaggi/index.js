@@ -57,6 +57,8 @@ function sheetdb(){
                 "Metodo di Pagamento": "omaggio",
                 "canale_di_vendita": "omaggio " + canaleDiVendita,
                 "valore_in_euro": 0,
+                "carnevale": "TRUE",
+                "registration_time": document.getElementById("Date").value,
                 "First Event": "250301"
             }]
     })
