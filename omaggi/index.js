@@ -55,7 +55,7 @@ function sheetdb(){
                 "Email": document.getElementById(`input-email0`).value,
                 "Telefono": document.getElementById(`input-telefono0`).value,
                 "Metodo di Pagamento": "omaggio",
-                "canale_di_vendita": "omaggio " + canaleDiVendita,
+                "canale_di_vendita": canaleDiVendita,
                 "valore_in_euro": 0,
                 "carnevale": "TRUE",
                 "registration_time": document.getElementById("Date").value,
