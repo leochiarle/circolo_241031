@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QR Code Scanner</title>
+    <base target="_top">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <link href="style.css" rel="stylesheet">
+    
+  </head>
+  <body>
+
+    <div class="row mt-2 mb-4"></div>
+
+    <div class="container text-center">
+      <!--<h1>Scanner QR Evento</h1>-->
+      <div id="reader"></div>
+
+      <h2 id="nome-cognome" class="mt-5" style="color: #fff"></h2>
+      <p id="message" class="mt-5" style="color: #fff"></p>
+      <h2 id="testo" class="mt-5" style="color: #fff"></h2>
+
+      <div class="mt-3 mb-5">
+        <form id="form" class="mt-4" style="display: none;">
+          <div id="CF">
+            <h2 class="form-label">Codice Fiscale:</h2>
+            <input id="input-CF" type="text" class="form-control" name="CF" placeholder="" required>
+            <div id="invalid-CF" class="invalid" style="display: none;"></div>
+          </div>
+          <div id="residenza">
+            <h2 class="form-label mt-2">Indirizzo:</h2>
+            <input id="input-residenza" type="text" class="form-control" name="Residenza" placeholder="" required>
+            <div id="invalid-residenza" class="invalid" style="display: none;"></div>
+          </div>
+          <div id="email">
+            <h2 class="form-label mt-2">Email:</h2>
+            <input id="input-email" type="text" class="form-control" name="Email" placeholder="" required>
+            <div id="invalid-email" class="invalid" style="display: none;"></div>
+          </div>
+          <div id="telefono">
+            <h2 class="form-label mt-2">Telefono:</h2>
+            <input id="input-telefono" type="text" class="form-control" name="Telefono" placeholder="" required>
+            <div id="invalid-telefono" class="invalid" style="display: none;"></div>
+          </div>
+
+          <button id="btn-submit" type="button" class="btn-primary btn-lg mt-3" onclick="updateData()">Salva dati</button>
+        </form>
+      </div>
+
+      <button id="btn-scanner" type="button" class="btn-primary mt-4" onclick="reloadScan()" style="display: none;">Apri scanner</button>
+
+    </div>
+
+    <script src="index.js"></script>
+
+  </body>
+</html>
